@@ -1,56 +1,55 @@
+# A Custom Application for Managing AH Events
+
+This Spring Boot application is a REST API that manages creating, updating, deleting, and retrieving events in various languages. Events fall under 2 categories: those that are generic, and those that translated. Generic events contain the event and all translations associated with such event, while the translated event exists solely as a translated 'view' of the event. Due to the nature of the differences between these two events, each have differeing CRUD capabilities, and therefore can be accessed via different URIs. 
 
 
 
-
-
-
-POST /events
+## 
+###`POST /events`
 -- save a list of generic events
 
 
 
 A. With translations
-
-	 *  {
-	 * 	events = [
-	 *  		{
-	 *  			eventType = "REG",
- 	 *  			defaultDataLang = "en", (optional)
-	 *  			eventStartDate = "2018-07-06",
-	 *  			eventEndDate = "2018-07-08", (optional)
-	 *  			eventTitle = "Be courageous",
- 	 *  			eventLanguage = "sp",
- 	 *  			dataLanguage = "en",
- 	 *  			comments = "Caution"
- 	 *  	
- 	 *  			translations=[
- 	 *  					{
- 	 *  						eventTitle= "Sea valiente",
- 	 *  						eventLanguage= "esp"
- 	 *  						dataLanguage="sp",
- 	 *  						comments= "Cuidado"
- 	 *  					},
- 	 *  					{
- 	 *  						eventTitle= "Soix courageux",
- 	 *  						eventLanguage= "esp"
- 	 *  						dataLanguage="fr",
- 	 *  						comments= "Mise en garde"
- 	 * 					}
- 	 *  
- 	 *  			]
- 	 *  		},
- 	 *  
- 	 *  		{ ... }
- 	 *  
- 	 *  	]
- 	 *  
- 	 *  }
- 	 *  
-
-
+```
+	{
+		events = [
+			{
+				eventType = "REG",
+ 	   			defaultDataLang = "en", (optional)
+	   			eventStartDate = "2018-07-06",
+	   			eventEndDate = "2018-07-08", (optional)
+	   			eventTitle = "Be courageous",
+ 	   			eventLanguage = "sp",
+ 	   			dataLanguage = "en",
+ 	   			comments = "Caution"
+ 	   	
+ 	   			translations=[
+ 	   					{
+ 	   						eventTitle= "Sea valiente",
+ 	   						eventLanguage= "esp"
+ 	   						dataLanguage="sp",
+ 	   						comments= "Cuidado"
+ 	   					},
+ 	  					{
+ 	  						eventTitle= "Soix courageux",
+ 	   						eventLanguage= "esp"
+ 	   						dataLanguage="fr",
+ 	   						comments= "Mise en garde"
+ 	  					}
+ 	   
+ 	   			]
+ 	   		},
+ 	   
+ 	   		{ ... }
+ 	   
+ 	   	]
+ 	   
+ 	}  
+```
 
 
-GET /events
+###`GET /events`
 Params: eventLang
 eventType
 after
@@ -62,33 +61,36 @@ before
 /events?eventLang=en&lang=sp&eventType=reg&after=2018-07-01&before=2018-08-2018
 
 Note: id represents id of event, does not take into consideration language it is in
-	 * {
-	 * 	events = [
-	 * 		{
-     	 * 			"eventLanguage": "en",
-    	 * 			"dataLanguage": "sp",
-     	 * 			"eventTitle": "Sea valiente!",
-     	 * 			"comments": "nada",
-     	 * 			"eventType": "REG",
-    	 * 			"eventStartDate": "2018-07-21",
-    	 * 			"eventEndDate": "2018-07-21",
-	 * 			"defaultDataLang": "sp",
- 	 *			"id": 434
-  	 *		},
-  	 *		{
-  	 *			"eventLanguage": "en",
-  	 *			"dataLanguage": "sp",
-  	 *			"eventTitle": "Sea valiente!",
-  	 *			"comments": "none",
-  	 *			"eventType": "REG",
-  	 *			"eventStartDate": "2018-07-22",
-    	 * 			"eventEndDate": "2018-07-23",
-	 * 			"defaultDataLang": "sp",
- 	 *			"id": 434
-  	 *		}
-	 * 	]
-	 * }
-	 * 
+
+```
+	{
+	 	events = [
+	  		{
+      			"eventLanguage": "en",
+     			"dataLanguage": "sp",
+      			"eventTitle": "Sea valiente!",
+      			"comments": "nada",
+      			"eventType": "REG",
+     			"eventStartDate": "2018-07-21",
+     			"eventEndDate": "2018-07-21",
+	  			"defaultDataLang": "sp",
+ 	 			"id": 434
+  	 		},
+  	 		{
+  	 			"eventLanguage": "en",
+  	 			"dataLanguage": "sp",
+  	 			"eventTitle": "Sea valiente!",
+  	 			"comments": "none",
+  	 			"eventType": "REG",
+  	 			"eventStartDate": "2018-07-22",
+     			"eventEndDate": "2018-07-23",
+	  			"defaultDataLang": "sp",
+ 	 			"id": 434
+  	 		}
+	  	]
+	}
+	  
+```
 
 
 
@@ -96,8 +98,7 @@ Note: id represents id of event, does not take into consideration language it is
 
 
 
-
-DELETE /events
+###`DELETE /events`
 Params: eventLang
 eventType
 after
@@ -111,117 +112,124 @@ before
 
 
 
-GET /generic/event/{id}
- 	 *  {
-	 *	id = 131,
-	 * 	eventType = "REG",
-	 *  	eventStartDate = "2018-07-06",
-	 *  	eventEndDate = "2018-07-08", (optional)
- 	 *  	defaultDataLang = "en",
- 	 *  	eventTranslations=[
- 	 *  			{
- 	 *  				eventTitle= "Sea valiente",
- 	 *  				eventLanguage= "esp"
- 	 *  				dataLanguage="sp",
- 	 *  				comments= "Cuidado"
- 	 *  			},
- 	 *  			{
- 	 *  				eventTitle= "Soix courageux",
- 	 *  				eventLanguage= "esp"
- 	 *  				dataLanguage="fr",
- 	 *  				comments= "Mise en garde"
- 	 * 			}
- 	 *  
- 	 *  	]
- 	 *  
- 	 *  }
- 	 *  
+###`GET /generic/event/{id}`
 
-POST /generic/event
- 	 *  {
-	 * 	eventType = "REG",
-	 *  	eventStartDate = "2018-07-06",
-	 *  	eventEndDate = "2018-07-08", (optional)
- 	 *  	defaultDataLang = "en",
- 	 *  	eventTranslations=[
- 	 *  			{
- 	 *  				eventTitle= "Sea valiente",
- 	 *  				eventLanguage= "esp"
- 	 *  				dataLanguage="sp",
- 	 *  				comments= "Cuidado"
- 	 *  			},
- 	 *  			{
- 	 *  				eventTitle= "Soix courageux",
- 	 *  				eventLanguage= "esp"
- 	 *  				dataLanguage="fr",
- 	 *  				comments= "Mise en garde"
- 	 * 			}
- 	 *  
- 	 *  	]
- 	 *  
- 	 *  }
- 	 *  
+```
+ 	{
+	 	id = 131,
+	  	eventType = "REG",
+	   	eventStartDate = "2018-07-06",
+	   	eventEndDate = "2018-07-08", (optional)
+ 	   	defaultDataLang = "en",
+ 	   	eventTranslations=[
+ 	   			{
+ 	   				eventTitle= "Sea valiente",
+ 	   				eventLanguage= "esp"
+ 	   				dataLanguage="sp",
+ 	   				comments= "Cuidado"
+ 	   			},
+ 	   			{
+ 	   				eventTitle= "Soix courageux",
+ 	   				eventLanguage= "esp"
+ 	   				dataLanguage="fr",
+ 	   				comments= "Mise en garde"
+ 	  			}
+ 	   
+ 	   	]
+ 	   
+ 	}
+ ``` 
 
-
-PUT /generic/event/{id}
- 	 *  {
-	 * 	eventType = "REG",
-	 *  	eventStartDate = "2018-07-06",
-	 *  	eventEndDate = "2018-07-08", (optional)
- 	 *  	defaultDataLang = "en",
- 	 *  	eventTranslations=[
- 	 *  			{
- 	 *  				eventTitle= "Sea valiente",
- 	 *  				eventLanguage= "esp"
- 	 *  				dataLanguage="sp",
- 	 *  				comments= "Cuidado"
- 	 *  			},
- 	 *  			{
- 	 *  				eventTitle= "Soix courageux",
- 	 *  				eventLanguage= "esp"
- 	 *  				dataLanguage="fr",
- 	 *  				comments= "Mise en garde"
- 	 * 			}
- 	 *  
- 	 *  	]
- 	 *  
- 	 *  }
- 	 *  
+###`POST /generic/event`
+```
+ 	{
+	  	eventType = "REG",
+	   	eventStartDate = "2018-07-06",
+	   	eventEndDate = "2018-07-08", (optional)
+ 	   	defaultDataLang = "en",
+ 	   	eventTranslations=[
+ 	   			{
+ 	   				eventTitle= "Sea valiente",
+ 	   				eventLanguage= "esp"
+ 	   				dataLanguage="sp",
+ 	   				comments= "Cuidado"
+ 	   			},
+ 	   			{
+ 	   				eventTitle= "Soix courageux",
+ 	   				eventLanguage= "esp"
+ 	   				dataLanguage="fr",
+ 	   				comments= "Mise en garde"
+ 	  			}
+ 	   	]
+ 	   
+ 	}
+``` 	  
 
 
-DELETE /generic/event/{id}
+###`PUT /generic/event/{id}`
+```
+ 	{
+	  	eventType = "REG",
+	   	eventStartDate = "2018-07-06",
+	   	eventEndDate = "2018-07-08", (optional)
+ 	   	defaultDataLang = "en",
+ 	   	eventTranslations=[
+ 	   			{
+ 	   				eventTitle= "Sea valiente",
+ 	   				eventLanguage= "esp"
+ 	   				dataLanguage="sp",
+ 	   				comments= "Cuidado"
+ 	   			},
+ 	   			{
+ 	   				eventTitle= "Soix courageux",
+ 	   				eventLanguage= "esp"
+ 	   				dataLanguage="fr",
+ 	   				comments= "Mise en garde"
+ 	  			}
+ 	   	]
+ 	   
+ 	}
+ ```  
 
 
-GET /translations/{id}
- 	 *  {
-	 *	id=2424,
- 	 *  	eventTitle= "Sea valiente",
- 	 *  	eventLanguage= "esp"
- 	 *  	dataLanguage="sp",
- 	 *  	comments= "Cuidado"
- 	 *  }
- 
-
-POST /translations/event/{id} - id of event
- 	 *  {
- 	 *  	eventTitle= "Sea valiente",
- 	 *  	eventLanguage= "esp"
- 	 *  	dataLanguage="sp",
- 	 *  	comments= "Cuidado"
- 	 *  }
- 
-
-PUT /translations/{id}
- 	 *  {
-	 *	id=2424,
- 	 *  	eventTitle= "Sea valiente",
- 	 *  	eventLanguage= "esp"
- 	 *  	dataLanguage="sp",
- 	 *  	comments= "Cuidado"
- 	 *  }
+###`DELETE /generic/event/{id}`
 
 
+###`GET /translations/{id}`
+```
+ 	{
+	 	id=2424,
+ 	   	eventTitle= "Sea valiente",
+ 	   	eventLanguage= "esp",
+ 	   	dataLanguage="sp",
+ 	   	comments= "Cuidado"
+ 	}
+``` 
 
-DELETE /translations/{id}
+###`POST /translations/event/{id}` - id of event
+
+```
+ 	{
+ 	  	eventTitle= "Sea valiente",
+ 	  	eventLanguage= "esp",
+ 	  	dataLanguage="sp",
+ 	  	comments= "Cuidado"
+ 	}
+ ```
+
+###`PUT /translations/{id}`
+
+```
+ 	{
+	 	id=2424,
+ 	  	eventTitle= "Sea valiente",
+ 	   	eventLanguage= "esp",
+ 	   	dataLanguage="sp",
+ 	   	comments= "Cuidado"
+ 	}
+```
+
+
+###`DELETE /translations/{id}`
 
 
