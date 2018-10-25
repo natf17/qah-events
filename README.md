@@ -4,12 +4,11 @@ This Spring Boot application is a REST API that manages creating, updating, dele
 
 
 
-`###POST /events`
--- save a list of generic events
+### POST a list of generic events
 
+**Ex: **`POST /events` 
+... with request body:
 
-
-A. With translations
 ```
 {
 	events = [
@@ -46,9 +45,10 @@ A. With translations
    
 }  
 ```
+... will send the events for processing.
 
 
-###`GET /events`
+### `GET /events` 
 Params: eventLang
 eventType
 after
