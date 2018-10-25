@@ -4,9 +4,11 @@ This Spring Boot application is a REST API that manages creating, updating, dele
 
 
 
-### POST a list of generic events
+### `POST /events`
 
-**Ex: **`POST /events` 
+POST a list of generic events
+
+**Ex:** `POST /events` 
 ... with request body:
 
 ```
