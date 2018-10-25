@@ -51,18 +51,20 @@ POST a list of generic events
 
 
 ### `GET /events` 
-Params: eventLang
-eventType
-after
-before
--- get a list of translated events that meets request params
+
+GET a list of translated events that meets request params
+
+Request parameters:
+- eventLang
+- eventType
+- after
+- before
 
 
+**Ex:** `POST /events?eventLang=en&lang=sp&eventType=reg&after=2018-07-01&before=2018-08-2018` 
 
-/events?eventLang=en&lang=sp&eventType=reg&after=2018-07-01&before=2018-08-2018
 
-Note: id represents id of event, does not take into consideration language it is in
-
+... returns: 
 ```
 {
  	events = [
@@ -92,6 +94,7 @@ Note: id represents id of event, does not take into consideration language it is
 }
 	  
 ```
+Note: id represents id of event, does not reflect language of event information
 
 
 
