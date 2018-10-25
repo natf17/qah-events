@@ -50,6 +50,7 @@ POST a list of generic events
 ... will send the events for processing.
 
 
+
 ### `GET /events` 
 
 GET a list of translated events that meets request params
@@ -60,9 +61,7 @@ Request parameters:
 - after
 - before
 
-
 **Ex:** `POST /events?eventLang=en&lang=sp&eventType=reg&after=2018-07-01&before=2018-08-2018` 
-
 
 ... returns: 
 ```
@@ -98,109 +97,131 @@ Note: id represents id of event, does not reflect language of event information
 
 
 
+### `DELETE /events`
+
+DELETE all translated events that meet request params
+
+Request parameters:
+- eventLang
+- eventType
+- after
+- before
+
+**Ex:** `DELETE /events?eventLang=en&eventType=reg&after=2018-07-01&before=2018-08-08`
+
+- Deletes all Regional events that are in English and are between July 1, 2018 and August 8, 2018
+- Returns status code of 202 if delete is successful.
 
 
 
+### `GET /generic/event/{id}`
 
-###`DELETE /events`
-Params: eventLang
-eventType
-after
-before
+GET the event with the given id as a generic event
 
--- delete a range of events
-Ex: /events?eventLang=en&eventType=reg&after=2018-07-01&before=2018-08-2018
-deletes all Regional events that are in English and are between July 1, 2018 and August 8, 2018
+**Ex:** `GET /generic/event/131`
 
-Returns status code of 202 if delete is successful.
-
-
-
-
-
-
-
-###`GET /generic/event/{id}`
-
+... returns:
 ```
- 	{
-	 	id = 131,
-	  	eventType = "REG",
-	   	eventStartDate = "2018-07-06",
-	   	eventEndDate = "2018-07-08", (optional)
- 	   	defaultDataLang = "en",
- 	   	eventTranslations=[
- 	   			{
- 	   				eventTitle= "Sea valiente",
- 	   				eventLanguage= "esp"
- 	   				dataLanguage="sp",
- 	   				comments= "Cuidado"
- 	   			},
- 	   			{
- 	   				eventTitle= "Soix courageux",
- 	   				eventLanguage= "esp"
- 	   				dataLanguage="fr",
- 	   				comments= "Mise en garde"
- 	  			}
+ {
+ 	id = 131,
+  	eventType = "REG",
+   	eventStartDate = "2018-07-06",
+   	eventEndDate = "2018-07-08", (optional)
+	defaultDataLang = "en",
+ 	eventTranslations=[
+ 	   		{
+ 	   			eventTitle= "Sea valiente",
+ 	   			eventLanguage= "esp"
+ 	   			dataLanguage="sp",
+ 	   			comments= "Cuidado"
+ 	   		},
+ 	   		{
+ 	   			eventTitle= "Soix courageux",
+ 	   			eventLanguage= "esp"
+ 	   			dataLanguage="fr",
+ 	   			comments= "Mise en garde"
+ 	  		}
  	   
- 	   	]
+ 	]
  	   
- 	}
+ }
  ``` 
 
-###`POST /generic/event`
+### `POST /generic/event`
+
+POST a single generic event
+
+**Ex:** `POST /generic/event` 
+... with request body:
 ```
- 	{
-	  	eventType = "REG",
-	   	eventStartDate = "2018-07-06",
-	   	eventEndDate = "2018-07-08", (optional)
- 	   	defaultDataLang = "en",
- 	   	eventTranslations=[
- 	   			{
- 	   				eventTitle= "Sea valiente",
- 	   				eventLanguage= "esp"
- 	   				dataLanguage="sp",
- 	   				comments= "Cuidado"
- 	   			},
- 	   			{
- 	   				eventTitle= "Soix courageux",
- 	   				eventLanguage= "esp"
- 	   				dataLanguage="fr",
- 	   				comments= "Mise en garde"
- 	  			}
- 	   	]
+{
+ 	eventType = "REG",
+	eventStartDate = "2018-07-06",
+	eventEndDate = "2018-07-08", (optional)
+   	defaultDataLang = "en",
+ 	eventTranslations=[
+ 	   		{
+ 	   			eventTitle= "Sea valiente",
+ 	   			eventLanguage= "esp"
+ 	   			dataLanguage="sp",
+ 	   			comments= "Cuidado"
+ 	   		},
+ 	   		{
+ 	   			eventTitle= "Soix courageux",
+ 	   			eventLanguage= "esp"
+ 	   			dataLanguage="fr",
+ 	   			comments= "Mise en garde"
+ 	  		}
+ 	   ]
  	   
- 	}
-``` 	  
+}
+```
+... will send the event for processing.
 
 
-###`PUT /generic/event/{id}`
+
+### `PUT /generic/event/{id}`
+
+PUT a single generic event
+
+**Ex:** `PUT /generic/event/{id}` 
+... with request body:
 ```
- 	{
-	  	eventType = "REG",
-	   	eventStartDate = "2018-07-06",
-	   	eventEndDate = "2018-07-08", (optional)
- 	   	defaultDataLang = "en",
- 	   	eventTranslations=[
- 	   			{
- 	   				eventTitle= "Sea valiente",
- 	   				eventLanguage= "esp"
- 	   				dataLanguage="sp",
- 	   				comments= "Cuidado"
- 	   			},
- 	   			{
- 	   				eventTitle= "Soix courageux",
- 	   				eventLanguage= "esp"
- 	   				dataLanguage="fr",
- 	   				comments= "Mise en garde"
- 	  			}
- 	   	]
+ {
+ 	eventType = "REG",
+	eventStartDate = "2018-07-06",
+	eventEndDate = "2018-07-08", (optional)
+ 	defaultDataLang = "en",
+ 	eventTranslations = [
+ 	   		{
+ 	   			eventTitle= "Sea valiente",
+ 	   			eventLanguage= "esp"
+ 	   			dataLanguage="sp",
+ 	   			comments= "Cuidado"
+ 	   		},
+ 	   		{
+ 	   			eventTitle= "Soix courageux",
+ 	   			eventLanguage= "esp"
+ 	   			dataLanguage="fr",
+ 	   			comments= "Mise en garde"
+ 	  		}
+	]
  	   
- 	}
+ }
  ```  
+... updates the event with the given id, completely replacing the entity in the repository with the request body
 
 
-###`DELETE /generic/event/{id}`
+
+### `DELETE /generic/event/{id}`
+
+DELETE the generic event with the given id
+
+**Ex:** `DELETE /generic/event/233`
+
+- Delete the event with id 233
+- Returns status code of 202 if delete is successful.
+
 
 
 ###`GET /translations/{id}`
