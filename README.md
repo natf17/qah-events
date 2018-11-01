@@ -1,6 +1,6 @@
 # A Custom Application for Managing AH Events
 
-This Spring Boot application is a REST API that manages creating, updating, deleting, and retrieving events in various languages. Events fall under 2 categories: those that are generic, and those that are translated. Generic events contain the event and all translations associated with such event, while the translated event exists solely as a translated 'view' of the event. Due to the nature of the differences between these two events, each have differing CRUD capabilities, which can be accessed via different URIs, as shown below:
+This Spring Boot application is a REST API that manages creating, updating, deleting, and retrieving events in various languages. Events fall under 2 categories: those that are generic, and those that are translated. Generic events contain the event and all translations associated with such event, while the translated event exists solely as a translated 'view' of the event. These two types of events have differing CRUD capabilities and can be accessed via different URIs, as shown below:
 
 
 
@@ -225,9 +225,16 @@ DELETE the generic event with the given id
 
 
 ###`GET /translations/{id}`
+
+GET the translation with the given id
+
+**Ex:** `GET /translations/58`
+
+... returns:
+
 ```
  	{
-	 	id=2424,
+	 	id=58,
  	   	eventTitle= "Sea valiente",
  	   	eventLanguage= "esp",
  	   	dataLanguage="sp",
@@ -235,8 +242,12 @@ DELETE the generic event with the given id
  	}
 ``` 
 
-###`POST /translations/event/{id}` - id of event
+###`POST /translations/event/{id}`
 
+POST a new EventTranslation to an event
+
+**Ex:** `POST /translations/event/78` 
+... with request body:
 ```
  	{
  	  	eventTitle= "Sea valiente",
@@ -245,20 +256,34 @@ DELETE the generic event with the given id
  	  	comments= "Cuidado"
  	}
  ```
+...will send the EventTranslation for processing. It will add the new EventTranslation to the event with id 78.
+
+
 
 ###`PUT /translations/{id}`
 
+PUT a single EventTranslation
+
+**Ex:** `PUT /translations/57` 
+... with request body:
+
 ```
  	{
-	 	id=2424,
+	 	id=57,
  	  	eventTitle= "Sea valiente",
  	   	eventLanguage= "esp",
  	   	dataLanguage="sp",
  	   	comments= "Cuidado"
  	}
 ```
-
+... updates the EventTranslation with id 57 by replacing the resource wth the body of the request.
 
 ###`DELETE /translations/{id}`
 
+DELETE the EventTranslation with the given id
+
+**Ex:** `DELETE /translations/53`
+
+- Delete the EventTranslation with id 53
+- Returns status code of 202 if delete is successful.
 
