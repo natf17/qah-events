@@ -224,7 +224,7 @@ DELETE the generic event with the given id
 
 
 
-###`GET /translations/{id}`
+### `GET /translations/{id}`
 
 GET the translation with the given id
 
@@ -242,7 +242,7 @@ GET the translation with the given id
  	}
 ``` 
 
-###`POST /translations/event/{id}`
+### `POST /translations/event/{id}`
 
 POST a new EventTranslation to an event
 
@@ -260,7 +260,7 @@ POST a new EventTranslation to an event
 
 
 
-###`PUT /translations/{id}`
+### `PUT /translations/{id}`
 
 PUT a single EventTranslation
 
@@ -278,7 +278,7 @@ PUT a single EventTranslation
 ```
 ... updates the EventTranslation with id 57 by replacing the resource wth the body of the request.
 
-###`DELETE /translations/{id}`
+### `DELETE /translations/{id}`
 
 DELETE the EventTranslation with the given id
 
