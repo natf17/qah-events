@@ -286,4 +286,3 @@ DELETE the EventTranslation with the given id
 
 - Delete the EventTranslation with id 53
 - Returns status code of 202 if delete is successful.
-
