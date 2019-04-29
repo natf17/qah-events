@@ -131,7 +131,7 @@ public class DefaultEventsRepositoryTest {
 		LocalDate start = LocalDate.of(2019, 3, 27);
 		LocalDate end = LocalDate.of(2019, 3, 30);
 		
-		Assert.assertEquals(5, repo.getEventsBetween(start, end, null, EventType.CACO).size());
+		Assert.assertEquals(5, repo.getEventsBetween(start, end, null, new EventType("CA-CO")).size());
 		
 	}
 
@@ -160,7 +160,7 @@ public class DefaultEventsRepositoryTest {
 		
 		LocalDate after = LocalDate.of(2019, 3, 30);
 		
-		Assert.assertEquals(5, repo.getEventsAfter(after, null, EventType.CACO).size());
+		Assert.assertEquals(5, repo.getEventsAfter(after, null, new EventType("CA-CO")).size());
 	}
 	
 	@Test
@@ -187,7 +187,7 @@ public class DefaultEventsRepositoryTest {
 		
 		LocalDate before = LocalDate.of(2019, 3, 27);
 		
-		Assert.assertEquals(2, repo.getEventsBefore(before, null, EventType.CACO).size());
+		Assert.assertEquals(2, repo.getEventsBefore(before, null, new EventType("CA-CO")).size());
 	}
 	
 	@Test
@@ -195,7 +195,7 @@ public class DefaultEventsRepositoryTest {
 		repo.saveEventsList(events);
 		
 		
-		Assert.assertEquals(6, repo.getEventsAllDates(null, EventType.CACO).size());
+		Assert.assertEquals(6, repo.getEventsAllDates(null, new EventType("CA-CO")).size());
 	}
 	
 	@Test
@@ -203,7 +203,7 @@ public class DefaultEventsRepositoryTest {
 		repo.saveEventsList(events);
 		
 		
-		Assert.assertEquals(6, repo.getEventsAllDates(null, EventType.CACO).size());
+		Assert.assertEquals(6, repo.getEventsAllDates(null, new EventType("CA-CO")).size());
 	}
 	
 	
@@ -212,7 +212,7 @@ public class DefaultEventsRepositoryTest {
 	@Test
 	public void givenNoEvents_thenGetEventsAllDates_ReturnsEmptyList() {
 
-		Assert.assertTrue(repo.getEventsAllDates(null, EventType.CACO).size() == 0);
+		Assert.assertTrue(repo.getEventsAllDates(null, new EventType("CA-CO")).size() == 0);
 	}
 	
 	@Test

@@ -13,7 +13,7 @@ public class GenericEvent extends EventTranslationObject implements EventSkeleto
 	private LocalDate eventEndDate;
 	private List<EventTranslationObject> eventTranslations;
 	
-
+	
 	
 	public void setEventType(String eventType) {
 		this.eventType = eventType;

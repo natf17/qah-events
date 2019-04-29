@@ -1,20 +1,32 @@
 package com.qah.kiosk.util;
 
-public enum EventType {
-	CACO("CA-CO"), 
-	CABR("CA-BR"),
-	REG("REG"),
-	MEM("MEM"),
-	OTHER("OTHER");
+
+public class EventType {
 	
-	private String event;
+	private final String abbr;
+	private String name;
 	
-	private EventType(String event) {
-		this.event = event;
+	public EventType(String abbr) {
+		this(abbr, null);
+	}
+	public EventType(String abbr, String name) {
+		this.abbr = abbr;
+		this.name = name;
 	}
 	
+	public String getAbbr() {
+		return this.abbr;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	@Override
 	public String toString() {
-		return event;
+		return abbr;
 	}
+
+
 
 }

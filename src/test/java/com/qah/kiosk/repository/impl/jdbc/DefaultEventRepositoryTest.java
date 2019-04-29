@@ -63,7 +63,7 @@ public class DefaultEventRepositoryTest {
 		Assert.assertEquals(id, ev.getId());
 		
 	}
-	/*
+	
 	@Test
 	public void whenPostEvent_thenMethodReturnsEventWithTranslations() {
 		Event ev = new Event();
@@ -212,5 +212,5 @@ public class DefaultEventRepositoryTest {
 		
 		Assert.assertTrue(eventRepo.deleteEvent(ev.getId()) == 1);
 	}
-*/
+
 }
