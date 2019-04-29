@@ -67,7 +67,6 @@ public class DefaultTranslationRepository implements TranslationRepository {
 			statement.setString(1, tr.getDataLanguage());
 			statement.setString(2, tr.getEventLanguage());
 			statement.setString(3, tr.getEventTitle());
-			
 			statement.setString(4, tr.getComments());
 			statement.setLong(5, eventId);
 			

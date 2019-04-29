@@ -109,7 +109,7 @@ public class DomainEntityUtils {
 		}
 		EventTranslation et = new EventTranslation();
 		et.setComments(eto.getComments());
-		et.setDataLanguage(et.getDataLanguage());
+		et.setDataLanguage(eto.getDataLanguage());
 		et.setEventLanguage(eto.getEventLanguage());
 		et.setEventTitle(eto.getEventTitle());
 		et.setId(eto.getId());

@@ -8,7 +8,6 @@
  */
 
 
-
 CREATE TABLE Events(
 					id 		  			BIGINT 		  NOT NULL		IDENTITY, 
 					eventType 			VARCHAR(10)   NOT NULL,
@@ -50,20 +49,15 @@ CREATE TABLE EventTranslations(
 								eventTitle 			VARCHAR(40) 	NOT NULL,
 								comments 			VARCHAR(100),
 								Events				BIGINT			NOT NULL,
-								
 								FOREIGN KEY(Events) 			REFERENCES Events(id) 					ON DELETE CASCADE
 								);
 								
 								
+/* In a production environment, we would create table relationships
 								
+		FOREIGN KEY(Events) 			REFERENCES Events(id) 					ON DELETE CASCADE
+*/
 								
 								
 								
 
-
-								
-								
-								
-								
-								
-								

@@ -62,7 +62,6 @@ public class GenericEventPartialValidator implements Validator {
 		eventType = event.getEventType();
 		if(eventType == null) {
 			
-			errors.rejectValue("eventType", "events.eventType.cannot_be_null");
 			errors.rejectValue("eventType", "property.cannot_be__null", new String[]{"eventType"}, null);
 			failOnMissingFields = true;
 		} else {

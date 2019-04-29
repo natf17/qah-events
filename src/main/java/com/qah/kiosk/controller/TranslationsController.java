@@ -99,10 +99,10 @@ public class TranslationsController {
 
 		}
 		
-		translationService.postTranslation(id, tr);
+		EventTranslationObject response = translationService.postTranslation(id, tr);
 		
 		
-		return new ResponseEntity<>(tr, HttpStatus.CREATED);
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
 		
 		
 	}
