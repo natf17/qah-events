@@ -96,17 +96,17 @@ public class DefaultEventsService implements EventsService {
 	@Override
 	public List<SingleTranslatedEvent> processGet(TimeRange timeRange, String eventLang, EventType eventType,
 			String contentLang) {
-		
 		List<GenericEvent> matchingEvents = processGet(timeRange, eventLang, eventType);
 		
 		if(matchingEvents.size() < 1) {
 			return Collections.emptyList();
 		}
-		
+
 		List<SingleTranslatedEvent> events = matchingEvents.stream()
 																.map(i -> EventsUtility.transformGenericToSingleTranslatedEvent(i, contentLang))
+																.filter(i -> i != null)
 																.collect(Collectors.toList());
-		
+
 		return EventsUtility.sortSingleTranslatedEvents(events);
 		
 	}

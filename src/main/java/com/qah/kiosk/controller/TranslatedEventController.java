@@ -28,7 +28,7 @@ public class TranslatedEventController {
 	 * GET an event by id in given language
 	 * 
 	 * 
-	 * ---- GET /events/translated/6543?lang=sp
+	 * ---- GET /event/translated/6543?lang=sp
 	 *
 	 *
 	 * ---> data sent in Spanish

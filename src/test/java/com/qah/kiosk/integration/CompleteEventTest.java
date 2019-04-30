@@ -32,7 +32,7 @@ import com.qah.kiosk.domain.GenericEvent;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes=MainApp.class)
 @AutoConfigureMockMvc
-public class CompleteEventTests {
+public class CompleteEventTest {
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -347,7 +347,7 @@ public class CompleteEventTests {
 	 * DELETE a translation that doesn't exist: returns 404
 	 */
 	@Test
-	public void deleteeGenericEvent_doesntExist_returns404() throws Exception{
+	public void deleteGenericEvent_doesntExist_returns404() throws Exception{
 
 		mockMvc.perform(delete("/event/9999"))
 				.andExpect(status().isNotFound());

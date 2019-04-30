@@ -276,7 +276,7 @@ PUT a single EventTranslation
  	   	comments= "Cuidado"
  	}
 ```
-... updates the EventTranslation with id 57 by replacing the resource wth the body of the request.
+... updates the EventTranslation with id 57 by replacing the resource with the body of the request.
 
 ### `DELETE /translations/{id}`
 
@@ -286,3 +286,8 @@ DELETE the EventTranslation with the given id
 
 - Delete the EventTranslation with id 53
 - Returns status code of 202 if delete is successful.
+
+Moving forward...
+	1. ?? If an event is requested in a language that doesn't exist, it should be returned in its default
+	2. Secure endpoints
+	3. Allow for changing allowable languages

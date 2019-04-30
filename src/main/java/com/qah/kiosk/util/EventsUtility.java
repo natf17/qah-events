@@ -1,6 +1,7 @@
 package com.qah.kiosk.util;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -18,29 +19,39 @@ public class EventsUtility {
 	
 	public static SingleTranslatedEvent transformGenericToSingleTranslatedEvent(GenericEvent ge, String contentLang) {
 		
-		
 		List<EventTranslationObject> ets = ge.getEventTranslations();
 		
 		if(ets == null || ets.size() < 1) {
-			throw new RuntimeException("A GenericEvent must have EventTranslations");
-		}
-		
-		EventTranslationObject desiredTr = ets.stream()
-											.filter(i -> i.getDataLanguage().equals(contentLang))
-											.limit(1)
-											.collect(Collectors.toList())
-											.get(0);
-		if(desiredTr == null) {
+			// A GenericEvent must have EventTranslations
+
 			return null;
 		}
 		
-		return createSingleTranslatedEvent(ge, desiredTr);
+		List<EventTranslationObject> desiredTrList = ets.stream()
+											.filter(i -> {
+												boolean t = i.getDataLanguage().equals(contentLang);
+												System.out.println(t);
+												return t;
+											})
+											.limit(1)
+											.collect(Collectors.toList());
+		
+		if(desiredTrList == null || desiredTrList.isEmpty()) {
+			return null;
+		}
+		
+		
+		return createSingleTranslatedEvent(ge, desiredTrList.get(0));
 		
 	}
 
 
 	public static List<SingleTranslatedEvent> sortSingleTranslatedEvents(List<SingleTranslatedEvent> events) {
-		
+		if(events == null || events.size() == 0) {
+
+			return new ArrayList<>();
+		}
+
 		Collections.sort(events, new SingleTranslatedEventComporatator());
 		
 		return events;

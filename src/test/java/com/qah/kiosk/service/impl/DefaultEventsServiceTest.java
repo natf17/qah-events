@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.qah.kiosk.entity.Event;
+import com.qah.kiosk.entity.EventTranslation;
 import com.qah.kiosk.repository.impl.jdbc.DefaultEventsRepository;
 import com.qah.kiosk.service.utils.TimeRange;
 
@@ -34,6 +35,7 @@ public class DefaultEventsServiceTest {
 		service.setEventsRepository(repo);
 		
 		Assert.assertTrue(service.processGet(TimeRange.createTimeRange(LocalDate.now(), LocalDate.now()), "test", null).size() == 0);
+		
 	}
 	
 	@Test
@@ -52,6 +54,64 @@ public class DefaultEventsServiceTest {
 		service.setEventsRepository(repo);
 		
 		Assert.assertTrue(service.processGet(TimeRange.createTimeRange(LocalDate.now(), LocalDate.now()), "test", null, null).size() == 0);
+		
+	}
+	
+	@Test
+	public void whenEventsNoTranslation_thenProcessGetTranslated_returnsEmptyList() {
+		DefaultEventsService service = new DefaultEventsService();
+		
+		Event ev1 = new Event();
+		ev1.setDefaultDataLang("en");
+		ev1.setEventEndDate(LocalDate.now());
+		ev1.setEventStartDate(LocalDate.now());
+		ev1.setEventTranslations(null); 
+		ev1.setEventType("REG");
+		ev1.setId(1L);
+		
+		Event ev2 = new Event();
+		ev2.setDefaultDataLang("en");
+		ev2.setEventEndDate(LocalDate.now());
+		ev2.setEventStartDate(LocalDate.now());
+		ev2.setEventTranslations(new ArrayList<>()); 
+		ev2.setEventType("REG");
+		ev2.setId(2L);
+		
+		EventTranslation et = new EventTranslation();
+		et.setComments("Comentarios");
+		et.setDataLanguage("en");
+		et.setEventLanguage("en");
+		et.setEventTitle("Title");
+		et.setId(1L);
+		
+		List<EventTranslation> etos = new ArrayList<>();
+		etos.add(et);
+		
+		Event ev3 = new Event();
+		ev3.setDefaultDataLang("en");
+		ev3.setEventEndDate(LocalDate.now());
+		ev3.setEventStartDate(LocalDate.now());
+		ev3.setEventTranslations(etos); 
+		ev3.setEventType("REG");
+		ev3.setId(3L);
+		
+		List<Event> eventList = new ArrayList<>();
+		eventList.add(ev1);
+		eventList.add(ev2);
+		eventList.add(ev3);
+
+		
+		DefaultEventsRepository repo = mock(DefaultEventsRepository.class);
+		
+		doReturn(eventList).when(repo).getEventsAfter(any(), any(), any());
+		doReturn(eventList).when(repo).getEventsAllDates(any(), any());
+		doReturn(eventList).when(repo).getEventsBefore(any(), any(), any());
+		doReturn(eventList).when(repo).getEventsBetween(any(), any(), any(), any());
+		
+		service.setEventsRepository(repo);
+		
+		Assert.assertTrue(service.processGet(TimeRange.createTimeRange(LocalDate.now(), LocalDate.now()), "test", null, "ko").size() == 0);
+		
 	}
 	
 	@Test
