@@ -38,7 +38,7 @@ public class TranslatedEventController {
 	 * 
 	 * {
 	 * 		"id": 6543,
-	 * 		"currentTranslationId": 567
+	 * 		"currentTranslationId": 567,
      * 		"eventLanguage": "en",
      * 		"dataLanguage": "sp",
      * 		"eventTitle": "Sea valiente!",

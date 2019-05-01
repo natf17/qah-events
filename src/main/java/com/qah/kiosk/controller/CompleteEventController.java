@@ -52,36 +52,36 @@ public class CompleteEventController {
 	 * GET an event by id
 	 * 
 	 * 
-	 * Sample JSON request body:
+	 * Sample JSON body:
 	 *
 	 * 
 	 * ---- GET /event/54
 	 * 
 	 * { 
-	 * 		id = 54
-	 * 		defaultTranslationId = 654
-	 * 		eventType = "REG",
-	 *  	eventStartDate = "2018-07-06",
-	 *  	eventEndDate = "2018-07-08", (optional)
-	 *  	eventTitle = "Be courageous",
- 	 *  	eventLanguage = "sp",
- 	 *  	defaultDataLang
- 	 *  	dataLanguage = "en",
- 	 *  	comments = "Caution"
- 	 *  	eventTranslations=[
+	 * 		id: 54
+	 * 		defaultTranslationId: 654
+	 * 		eventType: "REG",
+	 *  	eventStartDate: "2018-07-06",
+	 *  	eventEndDate: "2018-07-08", (optional)
+	 *  	eventTitle: "Be courageous",
+ 	 *  	eventLanguage: "sp",
+ 	 *  	defaultDataLang: "en",
+ 	 *  	dataLanguage: "en",
+ 	 *  	comment: "Caution",
+ 	 *  	eventTranslations:[
  	 *  					{
- 	 *  						id = 5465,
- 	 *  						eventTitle= "Sea valiente",
- 	 *  						eventLanguage= "esp"
- 	 *  						dataLanguage="sp",
- 	 *  						comments= "Cuidado"
+ 	 *  						id: 5465,
+ 	 *  						eventTitle: "Sea valiente",
+ 	 *  						eventLanguage: "esp"
+ 	 *  						dataLanguage:"sp",
+ 	 *  						comments: "Cuidado"
  	 *  					},
  	 *  					{
- 	 *  						id = 8765,
- 	 *  						eventTitle= "Soix courageux",
- 	 *  						eventLanguage= "esp"
- 	 *  						dataLanguage="fr",
- 	 *  						comments= "Mise en garde"
+ 	 *  						id: 8765,
+ 	 *  						eventTitle: "Soix courageux",
+ 	 *  						eventLanguage: "esp"
+ 	 *  						dataLanguage:"fr",
+ 	 *  						comments: "Mise en garde"
  	 * 						}
  	 *  
  	 *  	]

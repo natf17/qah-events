@@ -43,12 +43,12 @@ public class TranslationsController {
 	 * Sample JSON request body:
 	 * 
 	 * 
-	 * ---- GET /translation/5465
+	 * ---- GET /translations/5465
 	 * 
 	 * 	{
  	 *  	id = 5465,
  	 *  	eventTitle= "Sea valiente",
- 	 *  	eventLanguage= "esp"
+ 	 *  	eventLanguage= "ing",
  	 *  	dataLanguage="sp",
  	 *  	comments= "Cuidado"
  	 *  }
@@ -76,7 +76,7 @@ public class TranslationsController {
 	/*
 	 * POST a translation
 	 * 
-	 * ---- POST /translation/event/654
+	 * ---- POST /translations/event/654
 	 * 
 	 * ---> POST a new translation to the event with the given id
 	 * 
@@ -111,11 +111,10 @@ public class TranslationsController {
 	 * PUT a translation
 	 * 
 	 * 
-	 * ---- PUT /translation/54
+	 * ---- PUT /translations/54
 	 * 
 	 * Note: The id provided in the url path overrides any provided in the body request
 	 * 
-	 * This updated event will not be checked against repository for duplicates
 	 * 
 	 *  Throws:
 	 * 		- InvalidRequestException: if validation errors are found

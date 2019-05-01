@@ -85,41 +85,41 @@ public class CompleteEventsController {
 	 * GET events that match the event language, dates, and event type provided
 	 * 
 	 * 
-	 * Sample JSON request body:
+	 * Sample JSON body:
 	 * 
 	 * 
-	 * ---- GET /events?eventLang=en&eventType=reg&after=2018-07-01&before=2018-08-2018
+	 * ---- GET /events?eventLang=en&eventType=REG&after=2018-07-01&before=2018-08-01
 	 * 
-	 * ---> returns English regional conventions between July and August 2018
+	 * ---> returns English regional conventions between July 1 and August 1, 2018
 	 *
 	 *	{
-	 * 		events = [
+	 * 		events: [
 	 * 
 	 *  		{
-	 *  			id = 54
-	 * 				defaultTranslationId = 654
-	 * 				eventType = "REG",
-	 *  			eventStartDate = "2018-07-06",
-	 *  			eventEndDate = "2018-07-08", (optional)
-	 *  			eventTitle = "Be courageous",
- 	 *  			eventLanguage = "sp",
- 	 *  			defaultDataLang
- 	 *  			dataLanguage = "en",
- 	 *  			comments = "Caution"
- 	 *  			eventTranslations=[
+	 *  			id: 54
+	 * 				defaultTranslationId: 654
+	 * 				eventType: "REG",
+	 *  			eventStartDate: "2018-07-06",
+	 *  			eventEndDate: "2018-07-08", (optional)
+	 *  			eventTitle: "Be courageous",
+ 	 *  			eventLanguage: "sp",
+ 	 *  			defaultDataLang: "en", 
+ 	 *  			dataLanguage: "en",
+ 	 *  			comments: "Caution"
+ 	 *  			eventTranslations:[
  	 *  					{
- 	 *  						id = 5465,
- 	 *  						eventTitle= "Sea valiente",
- 	 *  						eventLanguage= "esp"
- 	 *  						dataLanguage="sp",
- 	 *  						comments= "Cuidado"
+ 	 *  						id: 5465,
+ 	 *  						eventTitle: "Sea valiente",
+ 	 *  						eventLanguage: "esp"
+ 	 *  						dataLanguage: "sp",
+ 	 *  						comments: "Cuidado"
  	 *  					},
  	 *  					{
- 	 *  						id = 8765,
- 	 *  						eventTitle= "Soix courageux",
- 	 *  						eventLanguage= "esp"
- 	 *  						dataLanguage="fr",
- 	 *  						comments= "Mise en garde"
+ 	 *  						id: 8765,
+ 	 *  						eventTitle: "Soix courageux",
+ 	 *  						eventLanguage: "esp"
+ 	 *  						dataLanguage: "fr",
+ 	 *  						comments: "Mise en garde"
  	 * 						}
  	 *  
  	 *  			]
@@ -159,9 +159,9 @@ public class CompleteEventsController {
 	/*
 	 * DELETE events (along with translations) that match parameters
 	 * 
-	 * ---- DELETE /events?eventLang=en&eventType=reg&after=2018-07-01&before=2018-08-2018
+	 * ---- DELETE /events?eventLang=en&eventType=REG&after=2018-07-01&before=2018-08-01
 	 * 
-	 * ---> deletes all English regional conventions on July
+	 * ---> deletes all English regional conventions in July
 	 * 
 	 * 
 	 * NOTE: If no parameters provided, all events will be deleted

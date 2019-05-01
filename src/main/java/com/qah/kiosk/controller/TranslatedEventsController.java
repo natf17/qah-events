@@ -44,7 +44,7 @@ public class TranslatedEventsController {
 	 * GET all events that match event language, dates, and event type, with multi-language support:
 	 * 
 	 * 
-	 * ---- GET /events/translated?eventLang=en&lang=sp&eventType=reg&after=2018-07-01&before=2018-08-18
+	 * ---- GET /events/translated?eventLang=en&lang=sp&eventType=REG&after=2018-07-01&before=2018-08-18
 	 *
 	 *
 	 * ---> data sent in Spanish; returns English regional conventions between July and August 2018
@@ -53,10 +53,10 @@ public class TranslatedEventsController {
 	 * Sample JSON response:
 	 * 
 	 * {
-	 * 	events = [
+	 * 	events: [
 	 * 		{
      * 			"id": 6543,
-	 * 			"currentTranslationId": 567
+	 * 			"currentTranslationId": 567,
      * 			"eventLanguage": "en",
      * 			"dataLanguage": "sp",
      * 			"eventTitle": "Sea valiente!",
