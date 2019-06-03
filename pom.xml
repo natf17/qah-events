@@ -17,24 +17,44 @@
   		<groupId>org.springframework.boot</groupId>
   		<artifactId>spring-boot-starter-web</artifactId>
   	</dependency>
+  	
   	<dependency>
   		<groupId>org.springframework.boot</groupId>
   		<artifactId>spring-boot-starter-data-jpa</artifactId>
   	</dependency>
+  	
   	<dependency>
   		<groupId>org.hsqldb</groupId>
   		<artifactId>hsqldb</artifactId>
   		<scope>runtime</scope>
   	</dependency>
+  	
   	<dependency>
-    <groupId>com.fasterxml.jackson.datatype</groupId>
-    <artifactId>jackson-datatype-jsr310</artifactId>
+    	<groupId>com.fasterxml.jackson.datatype</groupId>
+    	<artifactId>jackson-datatype-jsr310</artifactId>
 	</dependency>
+	
   	<dependency>
   		<groupId>org.springframework.boot</groupId>
   		<artifactId>spring-boot-starter-test</artifactId>
   		<scope>test</scope>
-  	</dependency>
+  		</dependency>
+  		
+  	<dependency>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-security</artifactId>
+	</dependency>
+	
+	<dependency>
+  		<groupId>org.springframework.security</groupId>
+  		<artifactId>spring-security-oauth2-resource-server</artifactId>
+	</dependency>
+	
+	<dependency>
+    	<groupId>org.springframework.security</groupId>
+    	<artifactId>spring-security-oauth2-jose</artifactId>
+	</dependency>
+	
   </dependencies>
   <build>
   <plugins>
