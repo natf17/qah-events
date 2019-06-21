@@ -118,7 +118,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  *  		this Jwt is returned
  * 
  *  	e. decoder.validateJwt(createdJwt);
- *  		- Spring Boot disables this... when it's building the decoder
+ *  		- Spring Boot uses JwtValidators.createDefault()
  *  	The Jwt is returned
  *  
  *  ------Validation in DefaultJWTProcessor.process(SignedJWT, SecurityContextontext)------
@@ -141,6 +141,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  *  	- for each key, use the JWSVerifierFactory to attempt to verify the signature. If it fails, try the
  *  	  next key until all are exhausted. If none matched, an exception is thrown
  *  	- when verification is successful: verifyAndReturnClaims(signedJWT, context)
+ *  	- NOTE: Spring boot DISABLES the verification that follows
  *  	- verifyAndReturnClaims(signedJWT, context) -> at this point, the signedJWT has been VERIFIED
  *  		- get JWTClaimsSet from SignedJWT -> see JWTClaimsSet.parse(...). It returns a JWTClaimsSet that contains
  *  		  reserved params ("exp","nbf", "iss", "aud", ...) and custom params from payload
