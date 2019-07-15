@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,6 +33,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.qah.kiosk.config.MainApp;
 import com.qah.kiosk.domain.EventTranslationObject;
 import com.qah.kiosk.domain.GenericEvent;
+import com.qah.kiosk.security.WithMockJwtAuthenticationToken;
 import com.qah.kiosk.service.EventsService;
 import com.qah.kiosk.service.utils.TimeRange;
 import com.qah.kiosk.util.EventType;
@@ -48,6 +50,9 @@ public class CompleteEventsControllerTest {
 	
 	@MockBean
 	private EventListValidator eventListValidator;
+	
+	@MockBean
+	private JwtDecoder jwtDecoder;
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -243,6 +248,7 @@ public class CompleteEventsControllerTest {
 	 */
 	@SuppressWarnings("unchecked")
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void givenValidBody_thenPostEventsWithTranslations_isSuccessful() throws Exception {
 		ArgumentCaptor<List<GenericEvent>> eventsReceivedCapt = ArgumentCaptor.forClass(List.class);
 				
@@ -287,6 +293,7 @@ public class CompleteEventsControllerTest {
 	 * Expect: 204 if successful
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void givenValidParams_thenDeleteEvents_isSuccessful() throws Exception {
 		
 		doReturn(true).when(eventsService).processDelete(any(), any(), any());
@@ -316,6 +323,7 @@ public class CompleteEventsControllerTest {
 	 * Expect: 404 
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void givenNoMatchingEvents_thenDeleteAllEvents_returns404() throws Exception {
 		doReturn(false).when(eventsService).processDelete(any(), any(), any());
 

@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qah.kiosk.config.MainApp;
 import com.qah.kiosk.domain.EventTranslationObject;
 import com.qah.kiosk.domain.GenericEvent;
+import com.qah.kiosk.security.WithMockJwtAuthenticationToken;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -75,6 +76,7 @@ public class CompleteEventTest {
 	 * POST a valid GenericEvent - returns 201
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void postValidGenericEvent_returns201() throws Exception{
 		GenericEvent ev = new GenericEvent();
 		ev.setComments("Comentarios");
@@ -134,6 +136,7 @@ public class CompleteEventTest {
 	 * POST an invalid GenericEvent - no eventTitle - returns 422
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void postInvalidGenericEvent_noEventTitle_returns422() throws Exception{
 		GenericEvent ev = new GenericEvent();
 		ev.setComments("Comentarios");
@@ -180,6 +183,7 @@ public class CompleteEventTest {
 	 * POST an invalid GenericEvent - event already exists - returns 422
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void postInvalidGenericEvent_eventAlreadyExists_returns422() throws Exception{
 		GenericEvent ev = new GenericEvent();
 		ev.setComments("Comentarios");
@@ -226,6 +230,7 @@ public class CompleteEventTest {
 	 * PUT a valid GenericEvent - returns 204
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void putValidGenericEvent_returns201() throws Exception{
 		GenericEvent ev = new GenericEvent();
 		ev.setComments("Comentarios");
@@ -285,6 +290,7 @@ public class CompleteEventTest {
 	 * PUT an invalid GenericEvent - invalid translation - returns 422
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void putInvalidGenericEvent_returns422() throws Exception{
 		GenericEvent ev = new GenericEvent();
 		ev.setComments("Comentarios");
@@ -331,6 +337,7 @@ public class CompleteEventTest {
 	 * DELETE a GenericEvent: returns 204
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void deleteGenericEvent_returns204() throws Exception{
 		
 		mockMvc.perform(delete("/event/10"))
@@ -347,6 +354,7 @@ public class CompleteEventTest {
 	 * DELETE a translation that doesn't exist: returns 404
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void deleteGenericEvent_doesntExist_returns404() throws Exception{
 
 		mockMvc.perform(delete("/event/9999"))

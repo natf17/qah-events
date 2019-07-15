@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,6 +32,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.qah.kiosk.config.MainApp;
 import com.qah.kiosk.domain.EventTranslationObject;
 import com.qah.kiosk.domain.GenericEvent;
+import com.qah.kiosk.security.WithMockJwtAuthenticationToken;
 import com.qah.kiosk.service.EventService;
 import com.qah.kiosk.validators.GenericEventFullValidator;
 import com.qah.kiosk.validators.GenericEventPutValidator;
@@ -44,6 +46,9 @@ public class CompleteEventControllerTest {
 	private MockMvc mockMvc;
 	@MockBean
 	private EventService eventService;
+	
+	@MockBean
+	private JwtDecoder jwtDecoder;
 	
 	@MockBean
 	private GenericEventPutValidator genericEventPutValidator;
@@ -112,8 +117,8 @@ public class CompleteEventControllerTest {
 	 * Valid id
 	 * 
 	 * Expect: 200 and body
-	 * 
 	 */
+	 
 	@Test
 	public void givenValidId_thenGetEvent_returnsFullyPopulatedResponse() throws Exception {
 		
@@ -161,6 +166,7 @@ public class CompleteEventControllerTest {
 	 * Expect: 201 and body if successful
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void givenValidEvent_thenPostTranslation_objectReceived() throws Exception {
 		mockMvc.perform(post("/event")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -189,6 +195,7 @@ public class CompleteEventControllerTest {
 	 *
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void givenValidEvent_thenPostTranslation_objectTranslationsReceived() throws Exception {
 		mockMvc.perform(post("/event")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -219,6 +226,7 @@ public class CompleteEventControllerTest {
 	 * Expect: 204 and body if successful
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void givenValidEvent_thenPutTranslation_objectReceived() throws Exception {
 		mockMvc.perform(put("/event/43")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -248,6 +256,7 @@ public class CompleteEventControllerTest {
 	 * Expect: 204 if successful
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void givenValidId_thenDeleteEvent_successful() throws Exception {
 		doReturn(true).when(eventService).deleteEvent(any());
 
@@ -270,6 +279,7 @@ public class CompleteEventControllerTest {
 	 * Expect: 404 if invalid id is provided
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void givenInvalidId_thenDeleteTranslation_unsuccessful() throws Exception {
 		when(eventService.deleteEvent(43L)).thenReturn(false);
 
@@ -277,8 +287,6 @@ public class CompleteEventControllerTest {
 					.contentType(MediaType.APPLICATION_JSON))
 					.andExpect(status().isNotFound());
 		
-		
 	}
 
-	
 }

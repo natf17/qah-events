@@ -230,6 +230,8 @@ public class CustomSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http
+			.csrf()
+				.disable()
 			.authorizeRequests()
 				.antMatchers(HttpMethod.GET).permitAll()
 				.anyRequest().authenticated()

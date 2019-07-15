@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qah.kiosk.config.MainApp;
 import com.qah.kiosk.domain.EventTranslationObject;
+import com.qah.kiosk.security.WithMockJwtAuthenticationToken;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes=MainApp.class)
@@ -64,6 +65,7 @@ public class TranslationsTest {
 	 * POST a translation with an invalid event id - returns 422
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void postTranslationWithInvalidEventId_returnsBody() throws Exception{
 		EventTranslationObject eto = new EventTranslationObject();
 		eto.setId(null);
@@ -85,6 +87,7 @@ public class TranslationsTest {
 	 * POST a valid translation - returns 201
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void postValidTranslation_returns201() throws Exception{
 		EventTranslationObject eto = new EventTranslationObject();
 		eto.setId(null);
@@ -114,6 +117,7 @@ public class TranslationsTest {
 	 * POST an invalid translation: id provided - returns 422
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void postInvalidTranslation_idProvided_returns422() throws Exception{
 		EventTranslationObject eto = new EventTranslationObject();
 		eto.setId(4L);
@@ -136,6 +140,7 @@ public class TranslationsTest {
 	 * POST an invalid translation: no eventTitle, no dataLanguage - returns 422
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void postInvalidTranslation_noEventTitle_returns422() throws Exception{
 		EventTranslationObject eto = new EventTranslationObject();
 		eto.setId(null);
@@ -159,6 +164,7 @@ public class TranslationsTest {
 	 * POST an invalid translation: duplicate - returns 422
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void postInvalidTranslation_duplicate_returns422() throws Exception{
 		EventTranslationObject eto = new EventTranslationObject();
 		eto.setId(null);
@@ -181,6 +187,7 @@ public class TranslationsTest {
 	 * PUT a valid translation - returns 204
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void putValidTranslation_returns204() throws Exception{
 		EventTranslationObject eto = new EventTranslationObject();
 		eto.setId(null);
@@ -200,6 +207,7 @@ public class TranslationsTest {
 	 * PUT an invalid translation: cannot change defaultDataLang - returns 204
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void putValidTranslation_changeDefaultDataLang_returns422() throws Exception{
 		EventTranslationObject eto = new EventTranslationObject();
 		eto.setId(null);
@@ -220,6 +228,7 @@ public class TranslationsTest {
 	 * DELETE a translation: returns 204
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void deleteTranslation_returns204() throws Exception{
 		
 		mockMvc.perform(delete("/translations/7"))
@@ -236,6 +245,7 @@ public class TranslationsTest {
 	 * DELETE a translation that doesn't exist: returns 404
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void deleteTranslation_doesntExist_returns404() throws Exception{
 
 		mockMvc.perform(delete("/translations/9999"))

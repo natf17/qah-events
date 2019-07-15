@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qah.kiosk.config.MainApp;
 import com.qah.kiosk.domain.EventTranslationObject;
 import com.qah.kiosk.domain.GenericEvent;
+import com.qah.kiosk.security.WithMockJwtAuthenticationToken;
 import com.qah.kiosk.util.GenericEventListWrapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -75,6 +76,7 @@ public class CompleteEventsTest {
 	 * POST a valid list of GenericEvents - returns 201
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void postValidGenericEventList_returns201() throws Exception{
 		GenericEvent ev = new GenericEvent();
 		ev.setComments("Comentarios");
@@ -187,6 +189,7 @@ public class CompleteEventsTest {
 	 * POST an invalid list of GenericEvents - 1 of them has no eventType - returns 422
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void postInvalidGenericEventList_noEventType_returns422() throws Exception{
 		GenericEvent ev = new GenericEvent();
 		ev.setComments("Comentarios");
@@ -269,6 +272,7 @@ public class CompleteEventsTest {
 	 * POST an invalid GenericEvent - duplicate event in List - returns 422
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void postInvalidGenericEvent_eventDuplicateInList_returns422() throws Exception{
 		GenericEvent ev = new GenericEvent();
 		ev.setComments("Comentarios");
@@ -344,6 +348,7 @@ public class CompleteEventsTest {
 	 * DELETE a list of GenericEvents: returns 204
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void deleteGenericEvent_returns204() throws Exception{
 		
 		mockMvc.perform(delete("/events?eventLang=en&eventType=REG&after=2020-03-27&before=2020-03-30"))
@@ -376,6 +381,7 @@ public class CompleteEventsTest {
 	 * DELETE a list of GenericEvents that don't exist: returns 404
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void deleteGenericEvent_doesntExist_returns404() throws Exception{
 
 		mockMvc.perform(delete("/events?eventLang=ko&eventType=REG&after=2020-03-27&before=2020-03-30"))

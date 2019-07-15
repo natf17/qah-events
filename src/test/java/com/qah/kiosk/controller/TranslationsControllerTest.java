@@ -21,12 +21,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.qah.kiosk.config.MainApp;
 import com.qah.kiosk.domain.EventTranslationObject;
+import com.qah.kiosk.security.WithMockJwtAuthenticationToken;
 import com.qah.kiosk.service.TranslationsService;
 import com.qah.kiosk.validators.EventTranslationValidator;
 
@@ -40,6 +42,9 @@ public class TranslationsControllerTest {
 	
 	@MockBean
 	private TranslationsService translationsService;
+	
+	@MockBean
+	private JwtDecoder jwtDecoder;
 	
 	@MockBean
 	private EventTranslationValidator translationValidator;
@@ -109,6 +114,7 @@ public class TranslationsControllerTest {
 	 * Expect: 201 and body if successful
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void givenValidTranslation_thenPostTranslation_objectReceived() throws Exception {
 		
 		mockMvc.perform(post("/translations/event/43")
@@ -136,6 +142,7 @@ public class TranslationsControllerTest {
 	 * Expect: 204 if successful
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void givenValidTranslation_thenPutTranslation_objectReceived() throws Exception {
 				
 		mockMvc.perform(put("/translations/43")
@@ -163,6 +170,7 @@ public class TranslationsControllerTest {
 	 * Expect: 204 if successful
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void givenValidId_thenDeleteTranslation_successful() throws Exception {
 		doReturn(true).when(translationsService).deleteTranslation(any());
 
@@ -185,6 +193,7 @@ public class TranslationsControllerTest {
 	 * Expect: 404 if invalid id is provided
 	 */
 	@Test
+	@WithMockJwtAuthenticationToken
 	public void givenInvalidId_thenDeleteTranslation_unsuccessful() throws Exception {
 		when(translationsService.deleteTranslation(43L)).thenReturn(false);
 
