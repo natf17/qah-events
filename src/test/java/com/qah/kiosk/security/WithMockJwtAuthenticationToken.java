@@ -11,6 +11,6 @@ public @interface WithMockJwtAuthenticationToken {
 
 	String username() default "test";
 
-    String[] authorities() default "user";
+    String[] authorities() default "ROLE_USER";
         
 }

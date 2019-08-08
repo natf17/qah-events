@@ -2,6 +2,8 @@
 
 This Spring Boot application is a REST API that manages creating, updating, deleting, and retrieving events in various languages. You can manage translations and events at `/translations` and `/event`, respectively. For operations on a list of events, such as getting or deleting a range of events, use `/events`. You could also load a translated "view" of an event in a certain language at `/event/translated` For a range of translated events, use `/events/translated`.
 
+As of version 1.0.0-RELEASE, this application is live at `https://agile-temple-65093.herokuapp.com`.
+
 What follows is a basic rundown of the application's capabilities.
 
 
@@ -408,11 +410,22 @@ DELETE the EventTranslation with the given id
 - Deletes the translation with `id` 53
 - Returns `204 No Content` if successful.
 
+## Security
+This application acts as a resource server, delegating authorization to an authorization server. It expects a header with a JWT signed by the authorization server:
+
+`Authorization : Bearer [JWT]`
+
+The authorization server's `/.well-known/jwks.json` endpoint is used to obtain the public key. The authorization server is located at: 
+
+```
+https://guarded-crag-86541.herokuapp.com
+```
+
+To `POST`, `DELETE`, and `PUT`, the user must've been granted the `ROLE_USER` or `ROLE_ADMIN` authorities. It expects the JWT to have a subject "scope" claim, with each authority separated by a space.
 
 ## Future enhancements
 	1. ?? If an event is requested in a language that doesn't exist, it should be returned in its default
-	2. Secure endpoints
-	3. Allow for changing allowable languages
+	2. Allow for changing allowable languages
 
 
 

@@ -234,7 +234,7 @@ public class CustomSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.disable()
 			.authorizeRequests()
 				.antMatchers(HttpMethod.GET).permitAll()
-				.anyRequest().authenticated()
+				.anyRequest().hasAnyRole("ADMIN", "USER")
 				.and()
 			.oauth2ResourceServer()
 				.jwt();
